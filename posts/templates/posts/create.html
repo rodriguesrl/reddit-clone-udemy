@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Create Post</h1>
+
+<form method="POST" action="url posts:create">
+	{% csrf_token %}
+	{{message}}<br><br>
+	Title:<br>
+	<input type="text" name="title"><br>
+	Url:<br>
+	<input type="text" name="url"><br><br>
+	<input class="btn btn-primary" type="submit" value="Create Post!">
+</form>
+{% endblock %}

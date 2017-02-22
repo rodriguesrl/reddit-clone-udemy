@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>The front page of nowhere</h1>
+<a class="btn btn-primary" href="{% url 'posts:create' %}">New Post!</a><br>
+
+{% for post in posts %}
+<table>
+	<tr>
+		<td style="padding-right: 20px;" align="center">
+			<span class="btn glyphicon glyphicon-triangle-top" aria-hidden="true" style="color: green" onClick="document.getElementById('upvote{{post.id}}').submit()"></span><br>
+			
+			<span">{{post.votes}}</span><br>
+
+			<span class="btn glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="color: red" onClick="document.getElementById('downvote{{post.id}}').submit()"></span>
+		<td>
+		<td> 
+			<a href="{{post.url}}">{{post.title}}</a><br>
+			<time>{{post.date_pretty}}</time> by:<a href="{%url 'posts:byuser' post.author.id%}">{{post.author}}</a>
+		<td>
+		<tr><hr></tr>
+	<tr>
+</table>
+
+<form id="upvote{{post.id}}" method="POST" action="{% url 'posts:upvote' post.id %}">
+	{% csrf_token %}
+	<input type="hidden">
+	<input type="hidden" name="from" value="home">
+</form>
+<form id="downvote{{post.id}}" method="POST" action="{%url 'posts:downvote' post.id%}">
+	{% csrf_token %}
+	<input type="hidden">
+	<!-- Add this input to the form: -->
+	<input type="hidden" name="from" value="home">
+</form>
+{% endfor %}
+{% endblock %}
