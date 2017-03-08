@@ -1,31 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Posts by the user: {{posts.0.author}}</h1>
+<h1>Posts by the user: {{post_list.0.author}}</h1>
 {% for post in post_list %}
 <table>
-	<tr>
-		<td style="padding-right: 20px;" align="center">
-			<span class="btn glyphicon glyphicon-triangle-top" aria-hidden="true" style="color: green" onClick="document.getElementById('upvote{{post.id}}').submit()"></span><br>
-			
-			<span>{{post.votes}}</span><br>
+  <tr>
+    <td style="padding-right: 20px;" align="center">
+      <span class="btn glyphicon glyphicon-triangle-top" aria-hidden="true" style="color: green" onClick="document.getElementById('upvote{{post.id}}').submit()"></span><br>
 
-			<span class="btn glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="color: red" onClick="document.getElementById('downvote{{post.id}}').submit()"></span>
-		<td>
-		<td> 
-			<a href="{{post.url}}">{{post.title}}</a><br>
-			<time>{{post.date_pretty}}</time> by: {{post.author}}
-		<td>
-		<tr><hr></tr>
-	<tr>
+      <span>{{post.votes}}</span><br>
+
+      <span class="btn glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="color: red" onClick="document.getElementById('downvote{{post.id}}').submit()"></span>
+    <td>
+    <td>
+      <a href="{{post.url}}">{{post.title}}</a><br>
+      <time>{{post.date_pretty}}</time> by: {{post.author}}
+    <td>
+    <tr><hr></tr>
+  <tr>
 </table>
 
 <form id="upvote{{post.id}}" method="POST" action="{%url 'posts:upvote' post.id%}">
-	{% csrf_token %}
-	<input type="hidden" name="from" value="user">
+  {% csrf_token %}
+  <input type="hidden" name="from" value="user">
 </form>
 <form id="downvote{{post.id}}" method="POST" action="{%url 'posts:downvote' post.id%}">
-	{% csrf_token %}
-	<input type="hidden" name="from" value="user">
+  {% csrf_token %}
+  <input type="hidden" name="from" value="user">
 </form>
 {% endfor %}
 
