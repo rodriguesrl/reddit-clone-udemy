@@ -9,6 +9,10 @@
 <form method="POST" action="{% url 'accounts:signup' %}">
 	{% csrf_token %}
 
+	{% if form.errors %}
+        <strong>{{form.errors}}</strong>
+	{% endif %}
+	
 	Username:<br>
 	<input type="text" name="username"><br>
 	Password:<br>

@@ -8,6 +8,11 @@
 {% endif %}
 <form method="POST" action="{% url 'accounts:signin' %}">
 	{% csrf_token %}
+
+	{% if form.errors %}
+        <strong>{{form.errors}}</strong>
+	{% endif %}
+	
 	{% if request.GET.next %}
 	<input type="hidden" name="next" value="{{ request.GET.next }}">
 	{% endif %}

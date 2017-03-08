@@ -1,11 +1,11 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 # Create your models here.
 
 class Post(models.Model):
 	title = models.CharField(max_length=200)
-	url = models.TextField()
+	url = models.URLField()
 	date = models.DateTimeField()
 	author = models.ForeignKey(User)
 	votes = models.IntegerField(default=1)

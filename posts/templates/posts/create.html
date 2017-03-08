@@ -5,7 +5,9 @@
 
 <form method="POST" action="url posts:create">
 	{% csrf_token %}
-	{{message}}<br><br>
+	{% if form.errors %}
+        <strong>{{form.errors}}</strong>
+	{% endif %}
 	Title:<br>
 	<input type="text" name="title"><br>
 	Url:<br>
